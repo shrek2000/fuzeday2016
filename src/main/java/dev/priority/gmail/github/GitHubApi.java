@@ -14,7 +14,7 @@ public class GitHubApi {
         String url = "https://api.github.com/repos/" + owner + "/" + repositoryName + "/pulls/" + numberPoolRequest + "?access_token=9c3d0d236afd211a7955d7363c164136a84af76e";
         GitHabData gitHabData = restTemplate.getForObject(url, GitHabData.class);
         log.info(gitHabData.toString());
-        return gitHabData.getBody();
+        return gitHabData.getCommits();
     }
 
 }
