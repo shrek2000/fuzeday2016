@@ -1,10 +1,9 @@
 package service;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import dev.priority.data.EmailConfiguration;
 import dev.priority.data.EmailMessage;
 import dev.priority.gmail.InterfaceGmailPost;
-import dev.priority.gmail.MessageManager;
+import dev.priority.gmail.InterfaceGmailPostImpl;
 import dev.priority.gmail.github.GitHubApi;
 import dev.priority.util.OnCompleteListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,14 @@ public class CommunicationService {
     @Autowired
     GitHubApi gitHubApi;
 
-    public  void test()
+    public CommunicationService() {
+        initService();
+    }
+
+    public void initService()
     {
 
-        final InterfaceGmailPost interfaceGmailPost = null;//new InterfaceGmailPost();
+        final InterfaceGmailPost interfaceGmailPost = new InterfaceGmailPostImpl();
 
         try {
             interfaceGmailPost.init( new OnCompleteListener<Void>() {
