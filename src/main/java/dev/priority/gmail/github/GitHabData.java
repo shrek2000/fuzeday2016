@@ -3,10 +3,12 @@ package dev.priority.gmail.github;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GitHabData {
-    String url;
-    String id;
-    String body;
+class GitHabData {
+    private String url;
+
+    private String id;
+
+    private String body;
 
     public GitHabData() {
     }
