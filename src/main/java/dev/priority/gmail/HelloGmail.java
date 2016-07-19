@@ -1,4 +1,5 @@
 package dev.priority.gmail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.*;
@@ -25,9 +26,17 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
+
+
+
 public class HelloGmail {
+
+
+
     public static void main(String[] args) throws Exception {
         SpringApplication.run(HelloGmail.class, args);
+
+
     }
 }
 

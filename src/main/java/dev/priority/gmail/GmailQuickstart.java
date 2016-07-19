@@ -1,5 +1,10 @@
 package dev.priority.gmail;
 
+/**
+ * Created by yoavbenishai on 19-Jul-16.
+ */
+
+
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -7,31 +12,21 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.json.JsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.GmailScopes;
-import dev.priority.data.EmailMessage;
-import dev.priority.util.OnCompleteListener;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import com.google.api.services.gmail.GmailScopes;
+import com.google.api.services.gmail.model.*;
+import com.google.api.services.gmail.Gmail;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-import static dev.priority.gmail.GmailQuickstart.authorize;
-
-/**
- * Created by yoavbenishai on 19-Jul-16.
- */
-@Component
-public class InterfaceGmailPostImpl implements InterfaceGmailPost {
-
-
+public class GmailQuickstart {
     /** Application name. */
     private static final String APPLICATION_NAME =
             "Gmail API Java Quickstart";
@@ -68,22 +63,6 @@ public class InterfaceGmailPostImpl implements InterfaceGmailPost {
         }
     }
 
-
-
-    private Gmail gmail;
-
-
-
-    @Override
-    public void init(OnCompleteListener<Void> onCompleted) throws IOException {
-
-        Credential credential = authorize();
-        gmail =  new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
-                .setApplicationName(APPLICATION_NAME)
-                .build();
-
-    }
-
     /**
      * Creates an authorized Credential object.
      * @return an authorized Credential object.
@@ -110,20 +89,35 @@ public class InterfaceGmailPostImpl implements InterfaceGmailPost {
         return credential;
     }
 
-
-
-    @Override
-    public void register(OnCompleteListener<EmailMessage> onReceivedListenet) {
-
+    /**
+     * Build and return an authorized Gmail client service.
+     * @return an authorized Gmail client service
+     * @throws IOException
+     */
+    public static Gmail getGmailService() throws IOException {
+        Credential credential = authorize();
+        return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+                .setApplicationName(APPLICATION_NAME)
+                .build();
     }
 
-    @Override
-    public void destroy(OnCompleteListener<Void> onCompleted) {
+    public static void main(String[] args) throws IOException {
+        // Build a new authorized API client service.
+        Gmail service = getGmailService();
 
+        // Print the labels in the user's account.
+        String user = "me";
+        ListLabelsResponse listResponse =
+                service.users().labels().list(user).execute();
+        List<Label> labels = listResponse.getLabels();
+        if (labels.size() == 0) {
+            System.out.println("No labels found.");
+        } else {
+            System.out.println("Labels:");
+            for (Label label : labels) {
+                System.out.printf("- %s\n", label.getName());
+            }
+        }
     }
 
-    @Override
-    public Gmail getGmailService() {
-        return gmail;
-    }
 }
