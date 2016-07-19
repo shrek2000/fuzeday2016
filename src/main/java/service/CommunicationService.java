@@ -40,7 +40,6 @@ public class CommunicationService {
                         public void onSuccess(EmailMessage emailMessage) {
                             String gitBody =  gitHubApi.getUserData("tikalk","OSTK-playbook", findPoolReuestId(emailMessage.getBody()));
                             if (isRuleExistOnBody(gitBody)){
-                                //  MessageManager.markImportant(interfaceGmailPost.getGmailService() , emailMessage.getId());
                                 try {
                                     interfaceGmailPost.markImportant(emailMessage.getId());
                                 } catch (IOException e) {
