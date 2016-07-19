@@ -10,6 +10,8 @@ class GitHabData {
 
     private String body;
 
+    private String commits;
+
     public GitHabData() {
     }
 
@@ -40,12 +42,22 @@ class GitHabData {
         return this;
     }
 
+    public String getCommits() {
+        return commits;
+    }
+
+    public GitHabData setCommits(String commits) {
+        this.commits = commits;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "GitHabData{" +
                 "body='" + body + '\'' +
                 ", url='" + url + '\'' +
                 ", id='" + id + '\'' +
+                ", commits='" + commits + '\'' +
                 '}';
     }
 }
