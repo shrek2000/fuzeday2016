@@ -13,5 +13,7 @@ public interface InterfaceGmailPost {
     public void init(OnCompleteListener<Void> onCompleted) throws IOException;
     public void register(OnCompleteListener<EmailMessage> onReceivedListenet);
     public void destroy(OnCompleteListener<Void> onCompleted);
+    public void markImportant(String messageId) throws IOException;
+    public void markNotImportant(String messageId) throws IOException;
     public Gmail getGmailService();
 }

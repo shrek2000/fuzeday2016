@@ -126,4 +126,16 @@ public class InterfaceGmailPostImpl implements InterfaceGmailPost {
     public Gmail getGmailService() {
         return gmail;
     }
+
+    @Override
+    public void markImportant(String messageId) throws IOException {
+        MessageManager.markImportant(gmail, messageId);
+    }
+
+    @Override
+    public void markNotImportant(String messageId) throws IOException {
+        MessageManager.markUnimportant(gmail, messageId);
+    }
+
+
 }

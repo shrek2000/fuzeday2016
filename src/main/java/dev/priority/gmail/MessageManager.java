@@ -45,14 +45,14 @@ List<String> labelsToAdd, List<String> labelsToRemove) throws IOException {
       System.out.println(message.toPrettyString());
   }
 
-  public static void markUnimportant(InterfaceGmailPost gmail, String messageId)
+  public static void markUnimportant(Gmail gmail, String messageId)
       throws IOException {
-       modifyMessage(gmail.getGmailService(), "me", messageId, unimportantLabels, importantLabels);
+       modifyMessage(gmail, "me", messageId, unimportantLabels, importantLabels);
   }
 
-public static void markImportant(InterfaceGmailPost gmail, String messageId)
+public static void markImportant(Gmail gmail, String messageId)
     throws IOException {
-       modifyMessage(gmail.getGmailService(), "me", messageId, importantLabels, unimportantLabels);
+       modifyMessage(gmail, "me", messageId, importantLabels, unimportantLabels);
   }
 
 }
