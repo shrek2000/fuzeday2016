@@ -101,7 +101,7 @@ public class GmailQuickstart {
                 .build();
     }
 
-    public static void main(String[] args) throws IOException {
+ /*   public static void main(String[] args) throws IOException {
         // Build a new authorized API client service.
         Gmail service = getGmailService();
 
@@ -119,5 +119,5 @@ public class GmailQuickstart {
             }
         }
     }
-
+*/
 }

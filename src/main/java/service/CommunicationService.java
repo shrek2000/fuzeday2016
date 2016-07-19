@@ -18,52 +18,18 @@ public class CommunicationService {
     @Autowired
     GitHubApi gitHubApi;
 
-    public  void test()
-    {
 
-        final InterfaceGmailPost interfaceGmailPost = null;//new InterfaceGmailPost();
-
-        interfaceGmailPost.init(emailConfiguration.getUserName(), emailConfiguration.getPassword(),
-                new OnCompleteListener<Void>() {
-
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        interfaceGmailPost.register(new OnCompleteListener<EmailMessage>() {
-
-
-                        @Override
-                        public void onSuccess(EmailMessage emailMessage) {
-                         String gitBody =  gitHubApi.getUserData("tikalk","OSTK-playbook", findPoolReuestId());
-                            if (isRuleExistOnBody(gitBody)){
-                                MessageManager.markImportant(emailMessage.getId());                            }
-
-                        }
-
-                        @Override
-                        public void onError(int code, String message, Throwable exception) {
-
-                        }
-                    });
-                }
-
-                @Override
-                public void onError(int code, String message, Throwable exception) {
-
-                }
-            });
+    public int findPoolReuestId() {
+        return 3;
     }
 
-            public int findPoolReuestId(){
-            return 3;
-            }
 
-
-            public boolean isRuleExistOnBody(String gitBody){
-                if (gitBody.equalsIgnoreCase("major")) {
-                return true;
-                }
-            return false;
-            }
+    public boolean isRuleExistOnBody(String gitBody) {
+        if (gitBody.equalsIgnoreCase("major")) {
+            return true;
+        }
+        return false;
+    }
 
 
 }
