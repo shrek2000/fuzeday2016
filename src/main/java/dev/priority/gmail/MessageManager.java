@@ -6,8 +6,22 @@ import com.google.api.services.gmail.model.ModifyMessageRequest;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.LinkedList;
 
 public class MessageManager {
+
+   private static final String IMPORTANT = "PDI important";
+
+   private static final String UNIMPORTANT = "PDI not important";
+
+   private static List<String> importantLabels, unimportantLabels;
+
+   static {
+       importantLabels = new LinkedList<>();
+       unimportantLabels = new LinkedList<>();
+       importantLabels.add(IMPORTANT);
+       unimportantLabels.add(UNIMPORTANT);
+   }
 
   /**
    * Modify the labels a message is associated with.
@@ -19,6 +33,7 @@ public class MessageManager {
    * @param labelsToAdd List of label ids to add.
    * @param labelsToRemove List of label ids to remove.
    * @throws IOException
+   *
    */
    public static void modifyMessage(Gmail service, String userId, String messageId,
 List<String> labelsToAdd, List<String> labelsToRemove) throws IOException {
@@ -30,8 +45,14 @@ List<String> labelsToAdd, List<String> labelsToRemove) throws IOException {
       System.out.println(message.toPrettyString());
   }
 
-  public static void markImportant(String messageId) {
-       //modifyMessage
+  public static void markUnimportant(InterfaceGmailPost gmail, String messageId)
+      throws IOException {
+       modifyMessage(gmail.getGmailService(), "me", messageId, unimportantLabels, importantLabels);
+  }
+
+public static void markImportant(InterfaceGmailPost gmail, String messageId)
+    throws IOException {
+       modifyMessage(gmail.getGmailService(), "me", messageId, importantLabels, unimportantLabels);
   }
 
 }
