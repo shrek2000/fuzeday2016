@@ -11,7 +11,7 @@ public class GitHubApi {
 
     public String getUserData(String owner, String repositoryName, int numberPoolRequest) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.github.com/repos/" + owner + "/" + repositoryName + "/pulls/" + numberPoolRequest + "?access_token=9c3d0d236afd211a7955d7363c164136a84af76e";
+        String url = "https://api.github.com/repos/" + owner + "/" + repositoryName + "/pulls/" + numberPoolRequest + "?access_token=fad93025ddd00220f033a2c69aaa8da5798bd47a";
         GitHabData gitHabData = restTemplate.getForObject(url, GitHabData.class);
         log.info(gitHabData.toString());
         return gitHabData.getCommits();
